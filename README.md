@@ -11,7 +11,7 @@ To use this app:
 1. Clone the repository:
 
 ```
-git clone
+git clone https://github.com/icyJoseph/flashcards.git
 ```
 
 2. Change directory into the repository's working directory:
