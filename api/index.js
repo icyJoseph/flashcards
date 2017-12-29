@@ -12,7 +12,9 @@ export function getDeck(id) {
 }
 
 export function saveDeckTitle(title) {
-  console.log("saved", title);
+  AsyncStorage.setItem(title, { title: title, questions: [] })
+    .then(res => console.log("saved deck title", res))
+    .catch(err => console.log("Error saving deck title", err));
 }
 
 export function addCardToDeck(title, card) {
