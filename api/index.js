@@ -12,7 +12,8 @@ export function getDeck(id) {
 }
 
 export function saveDeckTitle(title) {
-  AsyncStorage.setItem(title, { title: title, questions: [] })
+  const obj2store = JSON.stringify({ title: title, questions: [] });
+  AsyncStorage.setItem(DECK_STORAGE_KEY, obj2store)
     .then(res => console.log("saved deck title", res))
     .catch(err => console.log("Error saving deck title", err));
 }
