@@ -1,7 +1,10 @@
 import { AsyncStorage } from "react-native";
+import { DECK_STORAGE_KEY } from "../constants";
 
 export function getDecks() {
-  console.log("All Decks");
+  AsyncStorage.getAllKeys(DECK_STORAGE_KEY)
+    .then(res => console.log("All decks", res))
+    .catch(err => console.log("Error getting all decks", err));
 }
 
 export function getDeck(id) {
