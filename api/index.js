@@ -2,9 +2,7 @@ import { AsyncStorage } from "react-native";
 import { DECK_STORAGE_KEY } from "../constants";
 
 export function getDecks() {
-  AsyncStorage.getAllKeys(DECK_STORAGE_KEY)
-    .then(res => console.log("All decks", res))
-    .catch(err => console.log("Error getting all decks", err));
+  return AsyncStorage.getItem(DECK_STORAGE_KEY);
 }
 
 export function getDeck(id) {
@@ -12,9 +10,15 @@ export function getDeck(id) {
 }
 
 export function saveDeckTitle(title) {
-  AsyncStorage.setItem(title, { title: title, questions: [] })
-    .then(res => console.log("saved deck title", res))
-    .catch(err => console.log("Error saving deck title", err));
+  return getDecks()
+    .then(res => {
+      return JSON.parse(res);
+    })
+    .then(allDecks => {
+      const newTitle = { [title]: { title, questions: [] } };
+      const newDecks = Object.assign({}, newTitle, allDecks);
+      return AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(newDecks));
+    });
 }
 
 export function addCardToDeck(title, card) {
