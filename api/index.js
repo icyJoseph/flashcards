@@ -10,10 +10,15 @@ export function getDeck(id) {
 }
 
 export function saveDeckTitle(title) {
-  const obj2store = JSON.stringify({ title: title, questions: [] });
-  AsyncStorage.setItem(DECK_STORAGE_KEY, obj2store)
-    .then(res => console.log("saved deck title", res))
-    .catch(err => console.log("Error saving deck title", err));
+  return getDecks()
+    .then(res => {
+      return JSON.parse(res);
+    })
+    .then(allDecks => {
+      const newTitle = { [title]: { title, questions: [] } };
+      const newDecks = Object.assign({}, newTitle, allDecks);
+      return AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(newDecks));
+    });
 }
 
 export function addCardToDeck(title, card) {
