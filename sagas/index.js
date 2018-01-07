@@ -6,4 +6,4 @@ function* rootSaga() {
   yield all[takeEvery(types.GET_ALL_DECKS, loadAllDecks)];
 }
 
-export default rootSaga();
+export default rootSaga;
