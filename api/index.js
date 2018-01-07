@@ -2,7 +2,7 @@ import { AsyncStorage } from "react-native";
 import { DECK_STORAGE_KEY } from "../constants";
 
 export function getDecks() {
-  return AsyncStorage.getItem(DECK_STORAGE_KEY);
+  return AsyncStorage.getItem(DECK_STORAGE_KEY).then(res => res);
 }
 
 export function getDeck(id) {
@@ -17,7 +17,10 @@ export function saveDeckTitle(title) {
     .then(allDecks => {
       const newTitle = { [title]: { title, questions: [] } };
       const newDecks = Object.assign({}, newTitle, allDecks);
-      return AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(newDecks));
+      return AsyncStorage.setItem(
+        DECK_STORAGE_KEY,
+        JSON.stringify(newDecks)
+      ).then(res => res);
     });
 }
 
