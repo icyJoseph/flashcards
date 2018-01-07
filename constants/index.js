@@ -8,5 +8,6 @@ export const types = {
   FAILED_ALL_DECKS: "failed_all_decks",
   GET_DECK: "get_deck",
   LOAD_DECK: "load_deck",
+  FAIL_DECK: "fail_deck",
   ADD_CARD: "add_card"
 };
