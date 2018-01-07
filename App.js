@@ -1,10 +1,13 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, StatusBar } from "react-native";
+import { StyleSheet, Text, View, Platform, StatusBar } from "react-native";
 import { Provider } from "react-redux";
 import { TabNavigator, StackNavigator } from "react-navigation";
 import { Constants } from "expo";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import configureStore from "./store/configureStore";
-import { black, gray } from "./utils/colors";
+import { black, gray, white } from "./utils/colors";
+
+import Decks from "./components/Decks";
 
 const FitnessStatusBar = ({ backgroundColor, ...props }) => {
   return (
@@ -13,6 +16,39 @@ const FitnessStatusBar = ({ backgroundColor, ...props }) => {
     </View>
   );
 };
+
+const Tabs = TabNavigator(
+  {
+    Decks: {
+      screen: Decks,
+      navigationOptions: {
+        tabBarLabel: "Decks",
+        tabBarIcon: ({ tintColor }) => (
+          <MaterialCommunityIcons name="cards" size={30} color={tintColor} />
+        )
+      }
+    }
+  },
+  {
+    navigationOptions: {
+      header: null
+    },
+    tabBarOptions: {
+      activeTintColor: Platform.OS === "ios" ? gray : white,
+      style: {
+        height: 56,
+        backgroundColor: Platform.OS === "ios" ? white : gray,
+        shadowColor: "rgba(0,0,0,0.24)",
+        shadowOffset: {
+          width: 0,
+          height: 3
+        },
+        shadowRadius: 6,
+        shadowOpacity: 1
+      }
+    }
+  }
+);
 
 class App extends Component {
   render() {
