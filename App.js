@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, StatusBar } from "react-native";
 import { Provider } from "react-redux";
 import { TabNavigator, StackNavigator } from "react-navigation";
 import { Constants } from "expo";
-import configureStore from "./store";
+import configureStore from "./store/configureStore";
 import { black, gray } from "./utils/colors";
 
 const FitnessStatusBar = ({ backgroundColor, ...props }) => {
