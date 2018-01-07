@@ -9,10 +9,13 @@ class Decks extends Component {
   }
   render() {
     const { decks } = this.props;
+    const titles = Object.keys(decks);
     return (
       <View>
         <Text>All Decks Go here!</Text>
-        {decks.map(deck => <Text key={deck.title}>{deck.title}</Text>)}
+        {titles.length > 0
+          ? titles.map(title => <Text key={title}>{decks[title].title}</Text>)
+          : null}
       </View>
     );
   }
