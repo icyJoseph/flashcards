@@ -2,8 +2,8 @@ import { types } from "../constants";
 
 export default function deck(state = {}, action) {
   switch (action.type) {
-    case types.GET_ALL_DECKS:
-      return action.payload;
+    case types.LOAD_ALL_DECKS:
+      return { ...state, ...action.payload };
     default:
       return state;
   }
