@@ -2,7 +2,7 @@ import { AsyncStorage } from "react-native";
 import { DECK_STORAGE_KEY } from "../constants";
 
 export function getDecks() {
-  return AsyncStorage.getItem(DECK_STORAGE_KEY).then(res => res);
+  return AsyncStorage.getItem(DECK_STORAGE_KEY).then(res => JSON.parse(res));
 }
 
 export function getDeck(id) {
