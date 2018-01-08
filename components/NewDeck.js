@@ -63,7 +63,7 @@ export class NewDeck extends Component {
           disabled={disableSubmitButton}
         >
           <Text style={{ fontSize: 24, textAlign: "center", color: white }}>
-            {disableSubmitButton ? "Enter a valid title" : "Submit"}
+            {disableSubmitButton ? "Enter a valid title" : "Create Deck"}
           </Text>
         </TouchableOpacity>
       </View>

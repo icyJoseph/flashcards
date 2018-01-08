@@ -6,7 +6,7 @@ const DeckDetail = ({ title, questions }) => {
   return (
     <View style={[styles.container, styles.item]}>
       <Text style={{ fontSize: 24, fontWeight: "200" }}>{title}</Text>
-      <Text style={{ fontSize: 16 }}>{numberOfQuestions} questions</Text>
+      <Text style={{ fontSize: 16 }}>{numberOfQuestions} cards</Text>
     </View>
   );
 };
@@ -18,6 +18,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 22,
     alignItems: "center",
+    justifyContent: "center",
     borderRadius: 4,
     borderWidth: 0.5,
     borderColor: "#fff"
