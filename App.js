@@ -3,11 +3,12 @@ import { StyleSheet, Text, View, Platform, StatusBar } from "react-native";
 import { Provider } from "react-redux";
 import { TabNavigator, StackNavigator } from "react-navigation";
 import { Constants } from "expo";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import configureStore from "./store/configureStore";
 import { black, gray, white } from "./utils/colors";
 
 import Decks from "./components/Decks";
+import NewDeck from "./components/NewDeck";
 
 const FitnessStatusBar = ({ backgroundColor, ...props }) => {
   return (
@@ -25,6 +26,15 @@ const Tabs = TabNavigator(
         tabBarLabel: "Decks",
         tabBarIcon: ({ tintColor }) => (
           <MaterialCommunityIcons name="cards" size={30} color={tintColor} />
+        )
+      }
+    },
+    NewDeck: {
+      screen: NewDeck,
+      navigationOptions: {
+        tabBarLabel: "New Deck",
+        tabBarIcon: ({ tintColor }) => (
+          <MaterialIcons name="add-to-photos" size={30} color={tintColor} />
         )
       }
     }
@@ -56,6 +66,15 @@ const MainNavigator = StackNavigator({
   },
   Decks: {
     screen: Decks,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: gray
+      }
+    }
+  },
+  NewDeck: {
+    screen: NewDeck,
     navigationOptions: {
       headerTintColor: white,
       headerStyle: {
