@@ -5,5 +5,5 @@ export const getAllDecks = {
 };
 
 export const newDeck = {
-  type: types.NEW_DECK
+  type: types.CREATE_NEW_DECK
 };
