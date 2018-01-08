@@ -9,7 +9,7 @@ import {
   TouchableOpacity
 } from "react-native";
 import { connect } from "react-redux";
-import { saveDeckTitle } from "../api";
+import { newDeck } from "../actions";
 import { black, white } from "../utils/colors";
 
 export class NewDeck extends Component {
@@ -44,7 +44,11 @@ export class NewDeck extends Component {
     }
   };
 
-  submitTitle = () => {};
+  submitTitle = () => {
+    newDeck.payload = this.state.input;
+    this.props.dispatch(newDeck);
+    this.setState({ input: "", disableSubmitButton: true });
+  };
 
   render() {
     const { input, disableSubmitButton } = this.state;
