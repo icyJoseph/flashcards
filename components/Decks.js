@@ -1,20 +1,28 @@
 import React, { Component } from "react";
-import { View, Text, FlatList } from "react-native";
+import { View, Text, FlatList, Animated } from "react-native";
 import { connect } from "react-redux";
 import * as actions from "../actions";
 
 import DeckDetail from "./DeckDetail";
 
 class Decks extends Component {
+  state = {
+    fadeIn: new Animated.Value(0)
+  };
   componentDidMount() {
     this.props.dispatch(actions.getAllDecks);
+    Animated.timing(this.state.fadeIn, {
+      toValue: 1,
+      duration: 5000
+    }).start();
   }
   render() {
     const navigation = this.props.navigation;
     const titles = Object.keys(this.props.decks);
     const decks = Object.values(this.props.decks);
+    const { fadeIn } = this.state;
     return (
-      <View>
+      <Animated.View style={{ opacity: fadeIn }}>
         <FlatList
           data={decks}
           keyExtractor={item => item.title}
@@ -28,7 +36,7 @@ class Decks extends Component {
             );
           }}
         />
-      </View>
+      </Animated.View>
     );
   }
 }
