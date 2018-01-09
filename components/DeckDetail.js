@@ -1,13 +1,19 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { NavigationActions } from "react-navigation";
 
-const DeckDetail = ({ title, questions }) => {
+const DeckDetail = ({ title, questions, navigation }) => {
   const numberOfQuestions = questions.length;
+
   return (
-    <View style={[styles.container, styles.item]}>
-      <Text style={{ fontSize: 24, fontWeight: "200" }}>{title}</Text>
-      <Text style={{ fontSize: 16 }}>{numberOfQuestions} cards</Text>
-    </View>
+    <TouchableOpacity
+      onPress={() => navigation.navigate("IndividualDeck", { title })}
+    >
+      <View style={[styles.container, styles.item]}>
+        <Text style={{ fontSize: 24, fontWeight: "200" }}>{title}</Text>
+        <Text style={{ fontSize: 16 }}>{numberOfQuestions} cards</Text>
+      </View>
+    </TouchableOpacity>
   );
 };
 
