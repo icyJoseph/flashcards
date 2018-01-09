@@ -9,6 +9,7 @@ import {
   TouchableOpacity
 } from "react-native";
 import { connect } from "react-redux";
+import { NavigationActions } from "react-navigation";
 import { newDeck } from "../actions";
 import { black, white } from "../utils/colors";
 
@@ -48,6 +49,9 @@ export class NewDeck extends Component {
     newDeck.payload = this.state.input;
     this.props.dispatch(newDeck);
     this.setState({ input: "", disableSubmitButton: true });
+    this.props.navigation.navigate("IndividualDeck", {
+      title: newDeck.payload
+    });
   };
 
   render() {
