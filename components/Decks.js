@@ -10,6 +10,7 @@ class Decks extends Component {
     this.props.dispatch(actions.getAllDecks);
   }
   render() {
+    const navigation = this.props.navigation;
     const titles = Object.keys(this.props.decks);
     const decks = Object.values(this.props.decks);
     return (
@@ -18,7 +19,13 @@ class Decks extends Component {
           data={decks}
           keyExtractor={item => item.title}
           renderItem={deck => {
-            return <DeckDetail key={deck.index} {...deck.item} />;
+            return (
+              <DeckDetail
+                key={deck.index}
+                {...deck.item}
+                navigation={navigation}
+              />
+            );
           }}
         />
       </View>
