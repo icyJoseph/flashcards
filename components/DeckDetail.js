@@ -2,13 +2,10 @@ import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { NavigationActions } from "react-navigation";
 
-const DeckDetail = ({ title, questions, navigation }) => {
+const DeckDetail = ({ title, questions, handleOnPress }) => {
   const numberOfQuestions = questions.length;
-
   return (
-    <TouchableOpacity
-      onPress={() => navigation.navigate("IndividualDeck", { title })}
-    >
+    <TouchableOpacity onPress={() => handleOnPress(title)}>
       <View style={[styles.container, styles.item]}>
         <Text style={{ fontSize: 24, fontWeight: "200" }}>{title}</Text>
         <Text style={{ fontSize: 16 }}>{numberOfQuestions} cards</Text>
