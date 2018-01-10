@@ -15,7 +15,7 @@ class Decks extends Component {
     this.props.dispatch(actions.getAllDecks);
     Animated.timing(this.state.fadeIn, {
       toValue: 1,
-      duration: 5000
+      duration: 3000
     }).start();
   }
 
@@ -24,10 +24,16 @@ class Decks extends Component {
 
   onItemPress = title => {
     // Animate
-    Animated.timing(this.state.fadeOut, {
-      toValue: 0,
-      duration: 3000
-    }).start(() => this.props.navigation.navigate("IndividualDeck", { title }));
+    Animated.sequence([
+      Animated.timing(this.state.fadeOut, {
+        toValue: 0.3,
+        duration: 1000
+      }),
+      Animated.timing(this.state.fadeOut, {
+        toValue: 1,
+        duration: 1000
+      })
+    ]).start(() => this.props.navigation.navigate("IndividualDeck", { title }));
   };
 
   render() {
