@@ -1,13 +1,16 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { NavigationActions } from "react-navigation";
+import { capitalizer } from "../utils/helpers";
 
 const DeckDetail = ({ title, questions, handleOnPress }) => {
   const numberOfQuestions = questions.length;
   return (
     <TouchableOpacity onPress={() => handleOnPress(title)}>
       <View style={[styles.container, styles.item]}>
-        <Text style={{ fontSize: 24, fontWeight: "200" }}>{title}</Text>
+        <Text style={{ fontSize: 24, fontWeight: "200" }}>
+          {capitalizer(title)}
+        </Text>
         <Text style={{ fontSize: 16 }}>{numberOfQuestions} cards</Text>
       </View>
     </TouchableOpacity>
