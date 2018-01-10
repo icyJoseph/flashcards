@@ -26,7 +26,7 @@ export class NewDeck extends Component {
   };
 
   warning = () => {
-    return this.titleExists(this.state.input) ? (
+    return this.titleExists(this.state.input.toLowerCase()) ? (
       <Text style={{ color: "red" }}>The title already exists</Text>
     ) : null;
   };
@@ -35,7 +35,9 @@ export class NewDeck extends Component {
     if (input !== "") {
       this.setState({
         input,
-        disableSubmitButton: this.titleExists(input) ? true : false
+        disableSubmitButton: this.titleExists(input.toLowerCase())
+          ? true
+          : false
       });
     } else {
       this.setState({
@@ -46,7 +48,7 @@ export class NewDeck extends Component {
   };
 
   submitTitle = () => {
-    newDeck.payload = this.state.input;
+    newDeck.payload = this.state.input.toLowerCase();
     this.props.dispatch(newDeck);
     this.setState({ input: "", disableSubmitButton: true });
     this.props.navigation.navigate("IndividualDeck", {
