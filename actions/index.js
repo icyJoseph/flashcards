@@ -7,3 +7,7 @@ export const getAllDecks = {
 export const newDeck = {
   type: types.CREATE_NEW_DECK
 };
+
+export const addCard = {
+  type: types.ADD_CARD
+};
