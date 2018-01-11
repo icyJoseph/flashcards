@@ -12,6 +12,8 @@ export const types = {
 
   GET_DECK: "get_deck",
   LOAD_DECK: "load_deck",
-  FAIL_DECK: "fail_deck",
-  ADD_CARD: "add_card"
+  FAILED_DECK: "fail_deck",
+
+  ADD_CARD: "add_card",
+  FAILED_ADD_CARD: "failed_add_card"
 };
