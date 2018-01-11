@@ -10,6 +10,7 @@ import { black, gray, white } from "./utils/colors";
 import Decks from "./components/Decks";
 import NewDeck from "./components/NewDeck";
 import IndividualDeck from "./components/IndividualDeck";
+import AddCard from "./components/AddCard";
 
 const FitnessStatusBar = ({ backgroundColor, ...props }) => {
   return (
@@ -85,6 +86,15 @@ const MainNavigator = StackNavigator({
   },
   IndividualDeck: {
     screen: IndividualDeck,
+    navigationOptions: {
+      headerTintCOlor: white,
+      headerStyle: {
+        backgroundColor: gray
+      }
+    }
+  },
+  AddCard: {
+    screen: AddCard,
     navigationOptions: {
       headerTintCOlor: white,
       headerStyle: {
