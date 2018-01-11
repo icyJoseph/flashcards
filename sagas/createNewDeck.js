@@ -8,6 +8,6 @@ export function* createNewDeck(action) {
     yield call(saveDeckTitle, title);
     yield put({ type: types.GET_ALL_DECKS });
   } catch (error) {
-    yield put({ type: types.FAIL_DECK, error });
+    yield put({ type: types.FAILED_DECK, error });
   }
 }
