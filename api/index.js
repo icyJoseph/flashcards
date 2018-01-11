@@ -21,7 +21,16 @@ export function saveDeckTitle(title) {
 }
 
 export function addCardToDeck(title, card) {
-  console.log(title, card);
+  return getDecks().then(allDecks => {
+    const deckToUpdate = allDecks[title];
+    const updatedQuestions = deckToUpdate.questions.push(card);
+    const updatedTitle = { [title]: { title, questions: updatedQuestions } };
+    const updatedDecks = Object.assign({}, updatedTitle, allDecks);
+    return AsyncStorage.setItem(
+      DECK_STORAGE_KEY,
+      JSON.stringify(updatedDecks)
+    ).then(res => res);
+  });
 }
 
 export function removeAllDecks() {
