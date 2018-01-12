@@ -24,8 +24,8 @@ class IndividualDeck extends Component {
 
   render() {
     const { title } = this.props.navigation.state.params;
-    const { decks } = this.props.decks;
-    const questions = decks[title];
+    const { decks } = this.props;
+    const { questions } = decks[title];
 
     return (
       <View>
@@ -41,6 +41,7 @@ class IndividualDeck extends Component {
         </TouchableOpacity>
         <TouchableOpacity
           style={Platform.OS === "ios" ? styles.iosBtn : styles.androidBtn}
+          onPress={() => this.toQuiz(questions)}
         >
           <Text style={{ fontSize: 24, textAlign: "center", color: white }}>
             Start Quiz
@@ -51,7 +52,7 @@ class IndividualDeck extends Component {
   }
 }
 
-export default connect(state => ({ decks: state.decks }))(IndividualDeck);
+export default connect(state => ({ decks: state.decks }), null)(IndividualDeck);
 
 const styles = StyleSheet.create({
   iosBtn: {
