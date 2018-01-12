@@ -25,7 +25,7 @@ class IndividualDeck extends Component {
   render() {
     const { title } = this.props.navigation.state.params;
     const { decks } = this.props.decks;
-    const questions = decks[titles];
+    const questions = decks[title];
 
     return (
       <View>
