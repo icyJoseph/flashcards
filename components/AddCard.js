@@ -42,6 +42,7 @@ export class AddCard extends Component {
       inputAnswer: "",
       disableSubmitButton: true
     });
+    this.props.navigation.goBack();
   };
 
   render() {
