@@ -18,8 +18,15 @@ class IndividualDeck extends Component {
     this.props.navigation.navigate("AddCard", { title });
   };
 
+  toQuiz = questions => {
+    this.props.navigation.navigate("Quiz", { questions });
+  };
+
   render() {
     const { title } = this.props.navigation.state.params;
+    const { decks } = this.props.decks;
+    const questions = decks[titles];
+
     return (
       <View>
         <Text>Individual Deck</Text>
