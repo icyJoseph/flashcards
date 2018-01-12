@@ -5,10 +5,6 @@ export function getDecks() {
   return AsyncStorage.getItem(DECK_STORAGE_KEY).then(res => JSON.parse(res));
 }
 
-export function getDeck(id) {
-  console.log("get", id);
-}
-
 export function saveDeckTitle(title) {
   return getDecks().then(allDecks => {
     const newTitle = { [title]: { title, questions: [] } };
