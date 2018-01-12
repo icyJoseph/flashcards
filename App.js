@@ -10,7 +10,7 @@ import { black, gray, white } from "./utils/colors";
 import Decks from "./components/Decks";
 import NewDeck from "./components/NewDeck";
 import IndividualDeck from "./components/IndividualDeck";
-import Quiz from "./components/AddCard";
+import AddCard from "./components/AddCard";
 import Quiz from "./components/Quiz";
 
 const FitnessStatusBar = ({ backgroundColor, ...props }) => {
