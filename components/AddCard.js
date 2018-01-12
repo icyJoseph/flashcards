@@ -1,15 +1,8 @@
 import React, { Component } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  KeyboardAvoidingView,
-  StyleSheet,
-  Platform,
-  TouchableOpacity
-} from "react-native";
+import { View, Text, TextInput, KeyboardAvoidingView } from "react-native";
 import { connect } from "react-redux";
 import { NavigationActions } from "react-navigation";
+import InteractiveButton from "./InteractiveButton";
 import { addCard } from "../actions";
 import { black, white } from "../utils/colors";
 
@@ -58,34 +51,15 @@ export class AddCard extends Component {
         <Text>Answer</Text>
         <TextInput value={inputAnswer} onChangeText={this.handleAnswerChange} />
 
-        <TouchableOpacity
-          style={Platform.OS === "ios" ? styles.iosBtn : styles.androidBtn}
-          onPress={this.submitCard}
-        >
-          <Text style={{ fontSize: 24, textAlign: "center", color: white }}>
-            Add Card
-          </Text>
-        </TouchableOpacity>
+        <InteractiveButton
+          text={"Add Card"}
+          interaction={this.submitCard}
+          primaryColor={black}
+          secondaryColor={white}
+        />
       </View>
     );
   }
 }
 
 export default connect(undefined, null)(AddCard);
-
-const styles = StyleSheet.create({
-  iosBtn: {
-    backgroundColor: white,
-    borderColor: black,
-    borderRadius: 3,
-    padding: 5,
-    paddingLeft: 25,
-    paddingRight: 25
-  },
-  androidBtn: {
-    margin: 5,
-    backgroundColor: black,
-    padding: 10,
-    borderRadius: 2
-  }
-});

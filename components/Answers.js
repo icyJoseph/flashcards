@@ -1,16 +1,11 @@
 import React from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  Platform
-} from "react-native";
+import { View, Text } from "react-native";
 import shuffle from "shuffle-array";
+import InteractiveButton from "./InteractiveButton";
 import { black, white } from "../utils/colors";
 
 const Answers = ({ correct, incorrect, addPoint, passToNext }) => {
-  let randomizedAnswer = shuffle(
+  let randomized = shuffle(
     [
       { answer: correct, result: () => addPoint() },
       { answer: incorrect, result: () => passToNext() }
@@ -19,36 +14,17 @@ const Answers = ({ correct, incorrect, addPoint, passToNext }) => {
   );
   return (
     <View>
-      {randomizedAnswer.map((answer, i) => (
-        <TouchableOpacity
+      {randomized.map((random, i) => (
+        <InteractiveButton
           key={i}
-          style={Platform.OS === "ios" ? styles.iosBtn : styles.androidBtn}
-          onPress={randomizedAnswer[i].result}
-        >
-          <Text style={{ fontSize: 24, textAlign: "center", color: white }}>
-            {randomizedAnswer[i].answer}
-          </Text>
-        </TouchableOpacity>
+          text={random.answer}
+          interaction={random.result}
+          primaryColor={black}
+          secondaryColor={white}
+        />
       ))}
     </View>
   );
 };
 
 export default Answers;
-
-const styles = StyleSheet.create({
-  iosBtn: {
-    backgroundColor: white,
-    borderColor: black,
-    borderRadius: 3,
-    padding: 5,
-    paddingLeft: 25,
-    paddingRight: 25
-  },
-  androidBtn: {
-    margin: 5,
-    backgroundColor: black,
-    padding: 10,
-    borderRadius: 2
-  }
-});

@@ -1,13 +1,9 @@
 import React, { Component } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  Platform
-} from "react-native";
+import { View, Text } from "react-native";
 import { connect } from "react-redux";
-import { white, black } from "../utils/helpers";
+import InteractiveButton from "./InteractiveButton";
+import { white, black } from "../utils/colors";
+import { capitalizer } from "../utils/helpers";
 
 class IndividualDeck extends Component {
   _goBack = () => {
@@ -25,48 +21,32 @@ class IndividualDeck extends Component {
   render() {
     const { title } = this.props.navigation.state.params;
     const { decks } = this.props;
-    const { questions } = decks[title];
-
+    const questions = decks[title];
     return (
       <View>
-        <Text>Individual Deck</Text>
-        <Text>{title}</Text>
-        <TouchableOpacity
-          style={Platform.OS === "ios" ? styles.iosBtn : styles.androidBtn}
-          onPress={() => this.toAddCard(title)}
-        >
-          <Text style={{ fontSize: 24, textAlign: "center", color: white }}>
-            Add Card
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={Platform.OS === "ios" ? styles.iosBtn : styles.androidBtn}
-          onPress={() => this.toQuiz(questions)}
-        >
-          <Text style={{ fontSize: 24, textAlign: "center", color: white }}>
-            Start Quiz
-          </Text>
-        </TouchableOpacity>
+        <Text style={{ fontSize: 24, textAlign: "center", color: black }}>
+          {capitalizer(title)}
+        </Text>
+        <InteractiveButton
+          text={"Add Card"}
+          interaction={() => this.toAddCard(title)}
+          primaryColor={black}
+          secondaryColor={white}
+        />
+        <InteractiveButton
+          text={
+            questions && questions.length > 0
+              ? "Start Quiz"
+              : "Please Add a Card"
+          }
+          interaction={() => this.toQuiz(questions)}
+          primaryColor={black}
+          secondaryColor={white}
+          disable={questions === undefined || questions.length === 0}
+        />
       </View>
     );
   }
 }
 
 export default connect(state => ({ decks: state.decks }), null)(IndividualDeck);
-
-const styles = StyleSheet.create({
-  iosBtn: {
-    backgroundColor: white,
-    borderColor: black,
-    borderRadius: 3,
-    padding: 5,
-    paddingLeft: 25,
-    paddingRight: 25
-  },
-  androidBtn: {
-    margin: 5,
-    backgroundColor: black,
-    padding: 10,
-    borderRadius: 2
-  }
-});

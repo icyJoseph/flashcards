@@ -1,19 +1,12 @@
 import React, { Component } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  KeyboardAvoidingView,
-  StyleSheet,
-  Platform,
-  TouchableOpacity
-} from "react-native";
+import { View, Text, TextInput, KeyboardAvoidingView } from "react-native";
 import { connect } from "react-redux";
 import { NavigationActions } from "react-navigation";
+import InteractiveButton from "./InteractiveButton";
 import { newDeck } from "../actions";
 import { black, white } from "../utils/colors";
 
-export class NewDeck extends Component {
+class NewDeck extends Component {
   state = {
     input: "",
     disableSubmitButton: true
@@ -63,35 +56,16 @@ export class NewDeck extends Component {
         <Text>What's the title of your new deck?</Text>
         <TextInput value={input} onChangeText={this.handleTextChange} />
         {this.warning()}
-        <TouchableOpacity
-          style={Platform.OS === "ios" ? styles.iosBtn : styles.androidBtn}
-          onPress={this.submitTitle}
-          disabled={disableSubmitButton}
-        >
-          <Text style={{ fontSize: 24, textAlign: "center", color: white }}>
-            {disableSubmitButton ? "Enter a valid title" : "Create Deck"}
-          </Text>
-        </TouchableOpacity>
+        <InteractiveButton
+          text={disableSubmitButton ? "Enter a valid title" : "Create Deck"}
+          interaction={this.submitTitle}
+          primaryColor={black}
+          secondaryColor={white}
+          disable={disableSubmitButton}
+        />
       </View>
     );
   }
 }
 
 export default connect(state => ({ decks: state.decks }), null)(NewDeck);
-
-const styles = StyleSheet.create({
-  iosBtn: {
-    backgroundColor: white,
-    borderColor: black,
-    borderRadius: 3,
-    padding: 5,
-    paddingLeft: 25,
-    paddingRight: 25
-  },
-  androidBtn: {
-    margin: 5,
-    backgroundColor: black,
-    padding: 10,
-    borderRadius: 2
-  }
-});
