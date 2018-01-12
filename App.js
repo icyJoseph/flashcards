@@ -10,7 +10,8 @@ import { black, gray, white } from "./utils/colors";
 import Decks from "./components/Decks";
 import NewDeck from "./components/NewDeck";
 import IndividualDeck from "./components/IndividualDeck";
-import AddCard from "./components/AddCard";
+import Quiz from "./components/AddCard";
+import Quiz from "./components/Quiz";
 
 const FitnessStatusBar = ({ backgroundColor, ...props }) => {
   return (
@@ -95,6 +96,15 @@ const MainNavigator = StackNavigator({
   },
   AddCard: {
     screen: AddCard,
+    navigationOptions: {
+      headerTintCOlor: white,
+      headerStyle: {
+        backgroundColor: gray
+      }
+    }
+  },
+  Quiz: {
+    screen: Quiz,
     navigationOptions: {
       headerTintCOlor: white,
       headerStyle: {
