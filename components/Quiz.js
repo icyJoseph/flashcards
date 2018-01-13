@@ -9,6 +9,10 @@ import {
 import shuffle from "shuffle-array";
 import Answers from "./Answers";
 import { black, white } from "../utils/colors";
+import {
+  clearLocalNotification,
+  setLocalNotification
+} from "../utils/notifications";
 
 class Quiz extends Component {
   state = {
@@ -98,6 +102,8 @@ class Quiz extends Component {
   };
 
   renderDoneWithQuiz = () => {
+    // Once a quiz is finished, remove the notification for this day and set one for tomorrow
+    clearLocalNotification().then(setLocalNotification);
     return (
       <View>
         <Text>DONE!</Text>
