@@ -7,8 +7,7 @@ import DeckDetail from "./DeckDetail";
 
 class Decks extends Component {
   state = {
-    fadeIn: new Animated.Value(0),
-    fadeOut: new Animated.Value(1)
+    fadeIn: new Animated.Value(0)
   };
 
   componentDidMount() {
@@ -19,29 +18,16 @@ class Decks extends Component {
     }).start();
   }
 
-  // Should component Update?
-  // What to do when Update happens?
-
   onItemPress = title => {
-    // Animate
-    Animated.sequence([
-      Animated.timing(this.state.fadeOut, {
-        toValue: 0.3,
-        duration: 1000
-      }),
-      Animated.timing(this.state.fadeOut, {
-        toValue: 1,
-        duration: 1000
-      })
-    ]).start(() => this.props.navigation.navigate("IndividualDeck", { title }));
+    this.props.navigation.navigate("IndividualDeck", { title });
   };
 
   render() {
     const titles = Object.keys(this.props.decks);
     const decks = Object.values(this.props.decks);
-    const { fadeIn, fadeOut } = this.state;
+    const { fadeIn } = this.state;
     return (
-      <Animated.View style={[{ opacity: fadeIn }, { opacity: fadeOut }]}>
+      <Animated.View style={[{ opacity: fadeIn }]}>
         <FlatList
           data={decks}
           keyExtractor={item => item.title}

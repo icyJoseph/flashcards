@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { View, Text } from "react-native";
 import { connect } from "react-redux";
+import Title from "./Title";
 import InteractiveButton from "./InteractiveButton";
 import { white, black } from "../utils/colors";
 import { capitalizer } from "../utils/helpers";
@@ -22,11 +23,10 @@ class IndividualDeck extends Component {
     const { title } = this.props.navigation.state.params;
     const { decks } = this.props;
     const questions = decks[title];
+    const numberOfQuestions = questions.length;
     return (
       <View>
-        <Text style={{ fontSize: 24, textAlign: "center", color: black }}>
-          {capitalizer(title)}
-        </Text>
+        <Title title={title} numberOfQuestions={numberOfQuestions} />
         <InteractiveButton
           text={"Add Card"}
           interaction={() => this.toAddCard(title)}
@@ -35,14 +35,14 @@ class IndividualDeck extends Component {
         />
         <InteractiveButton
           text={
-            questions && questions.length > 0
+            questions && numberOfQuestions > 0
               ? "Start Quiz"
               : "Please Add a Card"
           }
           interaction={() => this.toQuiz(questions)}
           primaryColor={black}
           secondaryColor={white}
-          disable={questions === undefined || questions.length === 0}
+          disable={questions === undefined || numberOfQuestions === 0}
         />
       </View>
     );

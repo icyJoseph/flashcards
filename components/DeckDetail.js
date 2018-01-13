@@ -1,21 +1,47 @@
-import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import React, { Component } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Animated
+} from "react-native";
 import { NavigationActions } from "react-navigation";
-import { capitalizer } from "../utils/helpers";
+import Title from "./Title";
 
-const DeckDetail = ({ title, questions, handleOnPress }) => {
-  const numberOfQuestions = questions.length;
-  return (
-    <TouchableOpacity onPress={() => handleOnPress(title)}>
-      <View style={[styles.container, styles.item]}>
-        <Text style={{ fontSize: 24, fontWeight: "200" }}>
-          {capitalizer(title)}
-        </Text>
-        <Text style={{ fontSize: 16 }}>{numberOfQuestions} cards</Text>
-      </View>
-    </TouchableOpacity>
-  );
-};
+class DeckDetail extends Component {
+  state = {
+    fade: new Animated.Value(1)
+  };
+
+  animateBeforeNavigating = (title, handleOnPress) => {
+    Animated.sequence([
+      Animated.spring(this.state.fade, {
+        toValue: 0.3,
+        friction: 2
+      }),
+      Animated.spring(this.state.fade, {
+        toValue: 1,
+        friction: 2
+      })
+    ]).start(() => handleOnPress(title));
+  };
+
+  render() {
+    const { title, questions, handleOnPress } = this.props;
+    const { fade } = this.state;
+    const numberOfQuestions = questions.length;
+    return (
+      <TouchableOpacity
+        onPress={() => this.animateBeforeNavigating(title, handleOnPress)}
+      >
+        <Animated.View style={{ opacity: fade }}>
+          <Title title={title} numberOfQuestions={numberOfQuestions} />
+        </Animated.View>
+      </TouchableOpacity>
+    );
+  }
+}
 
 export default DeckDetail;
 
