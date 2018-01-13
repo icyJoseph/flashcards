@@ -28,7 +28,7 @@ class IndividualDeck extends Component {
       <View>
         <Title title={title} numberOfQuestions={numberOfQuestions} />
         <InteractiveButton
-          text={"Add Card"}
+          text={"Create New Question"}
           interaction={() => this.toAddCard(title)}
           primaryColor={black}
           secondaryColor={white}
@@ -37,7 +37,7 @@ class IndividualDeck extends Component {
           text={
             questions && numberOfQuestions > 0
               ? "Start Quiz"
-              : "Please Add a Card"
+              : "Please Add a Question"
           }
           interaction={() => this.toQuiz(questions)}
           primaryColor={black}

@@ -32,7 +32,6 @@ class Quiz extends Component {
       correct: q.answer,
       incorrect: shuffledAnswers[i]
     }));
-
     return quiz;
   };
 
@@ -44,7 +43,6 @@ class Quiz extends Component {
       // flag is true if no shuffledAnswer sits in the same index in answers
       flag = shuffledAnswers.filter((s, i) => s === answers[i]).length === 0;
     }
-
     return shuffledAnswers;
   };
 
