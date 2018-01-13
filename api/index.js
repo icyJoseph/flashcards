@@ -7,7 +7,8 @@ export function getDecks() {
 
 export function saveDeckTitle(title) {
   return getDecks().then(allDecks => {
-    const newTitle = { [title]: { title, questions: [] } };
+    const timestamp = Date.now();
+    const newTitle = { [title]: { title, questions: [], timestamp } };
     const newDecks = Object.assign({}, newTitle, allDecks);
     return AsyncStorage.setItem(
       DECK_STORAGE_KEY,
@@ -19,8 +20,11 @@ export function saveDeckTitle(title) {
 export function addCardToDeck(title, card) {
   return getDecks().then(allDecks => {
     const deckToUpdate = allDecks[title];
+    const timestamp = deckToUpdate.timestamp;
     const updatedQuestions = deckToUpdate.questions.push(card);
-    const updatedTitle = { [title]: { title, questions: updatedQuestions } };
+    const updatedTitle = {
+      [title]: { title, questions: updatedQuestions, timestamp }
+    };
     const updatedDecks = Object.assign({}, updatedTitle, allDecks);
     return AsyncStorage.setItem(
       DECK_STORAGE_KEY,
