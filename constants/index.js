@@ -1,5 +1,6 @@
 // AsyncStorage key
 export const DECK_STORAGE_KEY = "deckStorage:personal";
+export const NOTIFICATION_KEY = "notification:flashcard";
 
 // Action types for Redux
 export const types = {
