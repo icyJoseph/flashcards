@@ -14,7 +14,7 @@ class Decks extends Component {
     this.props.dispatch(actions.getAllDecks);
     Animated.timing(this.state.fadeIn, {
       toValue: 1,
-      duration: 3000
+      duration: 2000
     }).start();
   }
 
