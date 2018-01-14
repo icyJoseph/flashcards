@@ -1,30 +1,65 @@
-import React from "react";
+import React, { Component } from "react";
 import { View, Text } from "react-native";
 import shuffle from "shuffle-array";
 import InteractiveButton from "./InteractiveButton";
 import { black, white } from "../utils/colors";
 
-const Answers = ({ correct, incorrect, addPoint, passToNext }) => {
-  let randomized = shuffle(
-    [
-      { answer: correct, result: () => addPoint() },
-      { answer: incorrect, result: () => passToNext() }
-    ],
-    { copy: true }
-  );
-  return (
-    <View>
-      {randomized.map((random, i) => (
+class Answers extends Component {
+  state = {
+    revealAnswer: false
+  };
+
+  toggleAnswer = () => {
+    this.setState({ revealAnswer: !this.state.revealAnswer });
+  };
+
+  Answer = correct => {
+    return (
+      <InteractiveButton
+        text={correct}
+        interaction={this.toggleAnswer}
+        primaryColor={black}
+        secondaryColor={white}
+      />
+    );
+  };
+
+  randomizedOrderAnswers = randomized => {
+    return randomized.map((random, i) => (
+      <InteractiveButton
+        key={i}
+        text={random.answer}
+        interaction={random.result}
+        primaryColor={black}
+        secondaryColor={white}
+      />
+    ));
+  };
+
+  render() {
+    const { correct, incorrect, addPoint, passToNext } = this.props;
+    const { revealAnswer } = this.state;
+    const randomized = shuffle(
+      [
+        { answer: correct, result: () => addPoint() },
+        { answer: incorrect, result: () => passToNext() }
+      ],
+      { copy: true }
+    );
+
+    return (
+      <View>
+        {revealAnswer
+          ? this.Answer(correct)
+          : this.randomizedOrderAnswers(randomized)}
         <InteractiveButton
-          key={i}
-          text={random.answer}
-          interaction={random.result}
+          text={"Reveal Answer"}
+          interaction={this.toggleAnswer}
           primaryColor={black}
           secondaryColor={white}
         />
-      ))}
-    </View>
-  );
-};
-
+      </View>
+    );
+  }
+}
 export default Answers;
