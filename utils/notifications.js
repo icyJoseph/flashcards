@@ -11,7 +11,7 @@ export const clearLocalNotification = () => {
 const createNotification = () => {
   return {
     title: "Don't forget to study",
-    body: "No pain, no gain, put sometime to study ⏲",
+    body: "No pain, no gain. Put time to study ⏲",
     ios: {
       sound: true,
       priority: "high",
