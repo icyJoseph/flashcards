@@ -52,7 +52,7 @@ class NewDeck extends Component {
   render() {
     const { input, disableSubmitButton } = this.state;
     return (
-      <View>
+      <KeyboardAvoidingView>
         <Text>What's the title of your new deck?</Text>
         <TextInput value={input} onChangeText={this.handleTextChange} />
         {this.warning()}
@@ -63,7 +63,7 @@ class NewDeck extends Component {
           secondaryColor={white}
           disable={disableSubmitButton}
         />
-      </View>
+      </KeyboardAvoidingView>
     );
   }
 }
