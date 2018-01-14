@@ -117,7 +117,7 @@ const MainNavigator = StackNavigator({
 });
 
 class App extends Component {
-  componentWillMount() {
+  componentDidMount() {
     setLocalNotification();
   }
 
