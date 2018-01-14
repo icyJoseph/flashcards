@@ -23,8 +23,10 @@ class Decks extends Component {
   };
 
   render() {
-    const titles = Object.keys(this.props.decks);
-    const decks = Object.values(this.props.decks);
+    const decks = Object.values(this.props.decks).sort(
+      (a, b) => a.timestamp - b.timestamp
+    );
+
     const { fadeIn } = this.state;
     return (
       <Animated.View style={[{ opacity: fadeIn }]}>
