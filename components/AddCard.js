@@ -32,7 +32,7 @@ export class AddCard extends Component {
       title: this.props.navigation.state.params.title,
       card: {
         question: this.state.inputQuestion,
-        answer: this.state.inputQuestion
+        answer: this.state.inputAnswer
       }
     };
     this.props.dispatch(addCard);
