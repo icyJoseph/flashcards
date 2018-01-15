@@ -1,11 +1,7 @@
 import React from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  Platform
-} from "react-native";
+import { View, Text } from "react-native";
+import InteractiveButton from "./InteractiveButton";
+import Title from "./Title";
 import {
   clearLocalNotification,
   setLocalNotification
@@ -22,35 +18,16 @@ const DoneQuiz = ({ quiz, points, resetQuiz }) => {
 
   return (
     <View>
-      <Text>DONE!</Text>
-      <Text>{renderScore()}</Text>
-      <TouchableOpacity
-        style={Platform.OS === "ios" ? styles.iosBtn : styles.androidBtn}
-        onPress={resetQuiz}
-      >
-        <Text style={{ fontSize: 24, textAlign: "center", color: white }}>
-          Retry
-        </Text>
-      </TouchableOpacity>
+      <Title title={"DONE"} />
+      <Title title={renderScore()} />
+      <InteractiveButton
+        text={"Retry"}
+        interaction={resetQuiz}
+        primaryColor={black}
+        secondaryColor={white}
+      />
     </View>
   );
 };
 
 export default DoneQuiz;
-
-const styles = StyleSheet.create({
-  iosBtn: {
-    backgroundColor: white,
-    borderColor: black,
-    borderRadius: 3,
-    padding: 5,
-    paddingLeft: 25,
-    paddingRight: 25
-  },
-  androidBtn: {
-    margin: 5,
-    backgroundColor: black,
-    padding: 10,
-    borderRadius: 2
-  }
-});
