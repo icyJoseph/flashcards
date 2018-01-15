@@ -1,5 +1,11 @@
 import React, { Component } from "react";
-import { View, Text, TextInput, KeyboardAvoidingView } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  KeyboardAvoidingView
+} from "react-native";
 import { connect } from "react-redux";
 import { NavigationActions } from "react-navigation";
 import InteractiveButton from "./InteractiveButton";
@@ -45,12 +51,16 @@ export class AddCard extends Component {
         <Text>Add a new card</Text>
         <Text>Question?</Text>
         <TextInput
+          style={styles.input}
           value={inputQuestion}
           onChangeText={this.handleQuestionChange}
         />
         <Text>Answer</Text>
-        <TextInput value={inputAnswer} onChangeText={this.handleAnswerChange} />
-
+        <TextInput
+          style={styles.input}
+          value={inputAnswer}
+          onChangeText={this.handleAnswerChange}
+        />
         <InteractiveButton
           text={"Add Card"}
           interaction={this.submitCard}
@@ -63,3 +73,11 @@ export class AddCard extends Component {
 }
 
 export default connect(undefined, null)(AddCard);
+
+const styles = StyleSheet.create({
+  input: {
+    height: 40,
+    borderColor: "gray",
+    borderWidth: 1
+  }
+});
