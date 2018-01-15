@@ -1,13 +1,8 @@
 import React, { Component } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  Platform,
-  TouchableOpacity
-} from "react-native";
+import { View, Text } from "react-native";
 import Answers from "./Answers";
 import PreparingQuiz from "./PreparingQuiz";
+import Session from "./Session";
 import DoneQuiz from "./DoneQuiz";
 import { buildQuiz } from "../utils/helpers";
 import { black, white } from "../utils/colors";
@@ -39,40 +34,6 @@ class Quiz extends Component {
     this.nextQuestion();
   };
 
-  renderQuestion = (quiz, position) => {
-    return (
-      <View>
-        <Text>QUIZ</Text>
-        {position === quiz.length ? (
-          <DoneQuiz
-            quiz={this.state.quiz}
-            points={this.state.points}
-            resetQuiz={this.resetQuiz}
-          />
-        ) : (
-          <View>
-            <Text>Progression: {`${position}/${quiz.length}`}</Text>
-            <Text>{quiz[position].question}</Text>
-            <Answers
-              correct={quiz[position].correct}
-              incorrect={quiz[position].incorrect}
-              addPoint={this.addPoint}
-              passToNext={this.nextQuestion}
-            />
-            <TouchableOpacity
-              style={Platform.OS === "ios" ? styles.iosBtn : styles.androidBtn}
-              onPress={this.nextQuestion}
-            >
-              <Text style={{ fontSize: 24, textAlign: "center", color: white }}>
-                Pass
-              </Text>
-            </TouchableOpacity>
-          </View>
-        )}
-      </View>
-    );
-  };
-
   resetQuiz = () => {
     this.setState({
       points: 0,
@@ -82,30 +43,20 @@ class Quiz extends Component {
   };
 
   render() {
-    const { quiz, position } = this.state;
+    const { quiz, position, points } = this.state;
     return quiz.length === 0 ? (
       <PreparingQuiz />
     ) : (
-      this.renderQuestion(quiz, position)
+      <Session
+        quiz={quiz}
+        position={position}
+        points={points}
+        resetQuiz={this.resetQuiz}
+        addPoint={this.addPoint}
+        nextQuestion={this.nextQuestion}
+      />
     );
   }
 }
 
 export default Quiz;
-
-const styles = StyleSheet.create({
-  iosBtn: {
-    backgroundColor: white,
-    borderColor: black,
-    borderRadius: 3,
-    padding: 5,
-    paddingLeft: 25,
-    paddingRight: 25
-  },
-  androidBtn: {
-    margin: 5,
-    backgroundColor: black,
-    padding: 10,
-    borderRadius: 2
-  }
-});
