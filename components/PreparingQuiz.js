@@ -1,10 +1,11 @@
 import React from "react";
 import { View, Text } from "react-native";
+import Title from "./Title";
 
 const PreparingQuiz = () => {
   return (
     <View>
-      <Text>Preparing Quiz</Text>
+      <Title title={"Preparing Quiz"} />
     </View>
   );
 };
