@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import { NavigationActions } from "react-navigation";
+import Title from "./Title";
 import InteractiveButton from "./InteractiveButton";
 import { addCard } from "../actions";
 import { black, white } from "../utils/colors";
@@ -48,14 +49,14 @@ export class AddCard extends Component {
     const { inputQuestion, inputAnswer, disableSubmitButton } = this.state;
     return (
       <View>
-        <Text>Add a new card</Text>
-        <Text>Question?</Text>
+        <Title title={"Add a new card"} />
+        <Title title={"Question?"} />
         <TextInput
           style={styles.input}
           value={inputQuestion}
           onChangeText={this.handleQuestionChange}
         />
-        <Text>Answer</Text>
+        <Title title={"Answer"} />
         <TextInput
           style={styles.input}
           value={inputAnswer}
