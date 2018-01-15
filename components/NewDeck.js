@@ -1,5 +1,11 @@
 import React, { Component } from "react";
-import { View, Text, TextInput, KeyboardAvoidingView } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  KeyboardAvoidingView,
+  Keyboard
+} from "react-native";
 import { connect } from "react-redux";
 import { NavigationActions } from "react-navigation";
 import InteractiveButton from "./InteractiveButton";
@@ -44,6 +50,7 @@ class NewDeck extends Component {
     newDeck.payload = this.state.input.toLowerCase();
     this.props.dispatch(newDeck);
     this.setState({ input: "", disableSubmitButton: true });
+    Keyboard.dismiss();
     this.props.navigation.navigate("IndividualDeck", {
       title: newDeck.payload
     });
