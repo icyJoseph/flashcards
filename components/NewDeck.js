@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import {
   View,
   Text,
+  StyleSheet,
   TextInput,
   KeyboardAvoidingView,
   Keyboard
 } from "react-native";
 import { connect } from "react-redux";
 import { NavigationActions } from "react-navigation";
+import Title from "./Title";
 import InteractiveButton from "./InteractiveButton";
 import { newDeck } from "../actions";
 import { black, white } from "../utils/colors";
@@ -60,8 +62,12 @@ class NewDeck extends Component {
     const { input, disableSubmitButton } = this.state;
     return (
       <KeyboardAvoidingView>
-        <Text>What's the title of your new deck?</Text>
-        <TextInput value={input} onChangeText={this.handleTextChange} />
+        <Title title={"What's the title of your new deck?"} />
+        <TextInput
+          style={styles.input}
+          value={input}
+          onChangeText={this.handleTextChange}
+        />
         {this.warning()}
         <InteractiveButton
           text={disableSubmitButton ? "Enter a valid title" : "Create Deck"}
@@ -76,3 +82,13 @@ class NewDeck extends Component {
 }
 
 export default connect(state => ({ decks: state.decks }), null)(NewDeck);
+
+const styles = StyleSheet.create({
+  input: {
+    height: 40,
+    borderColor: "gray",
+    borderWidth: 1,
+    padding: 5,
+    margin: 10
+  }
+});
