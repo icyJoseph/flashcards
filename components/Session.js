@@ -1,6 +1,9 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text } from "react-native";
 import DoneQuiz from "./DoneQuiz";
+import Answers from "./Answers";
+import Title from "./Title";
+import { black, white } from "../utils/colors";
 
 const Session = ({
   quiz,
@@ -12,27 +15,19 @@ const Session = ({
 }) => {
   return (
     <View>
-      <Text>QUIZ</Text>
+      <Title title={"QUIZ"} />
       {position === quiz.length ? (
         <DoneQuiz quiz={quiz} points={points} resetQuiz={resetQuiz} />
       ) : (
         <View>
-          <Text>Progression: {`${position}/${quiz.length}`}</Text>
-          <Text>{quiz[position].question}</Text>
+          <Title title={`Progression: ${position}/${quiz.length}`} />
+          <Title title={quiz[position].question} />
           <Answers
             correct={quiz[position].correct}
             incorrect={quiz[position].incorrect}
             addPoint={addPoint}
             passToNext={nextQuestion}
           />
-          <TouchableOpacity
-            style={Platform.OS === "ios" ? styles.iosBtn : styles.androidBtn}
-            onPress={nextQuestion}
-          >
-            <Text style={{ fontSize: 24, textAlign: "center", color: white }}>
-              Pass
-            </Text>
-          </TouchableOpacity>
         </View>
       )}
     </View>
@@ -40,20 +35,3 @@ const Session = ({
 };
 
 export default Session;
-
-const styles = StyleSheet.create({
-  iosBtn: {
-    backgroundColor: white,
-    borderColor: black,
-    borderRadius: 3,
-    padding: 5,
-    paddingLeft: 25,
-    paddingRight: 25
-  },
-  androidBtn: {
-    margin: 5,
-    backgroundColor: black,
-    padding: 10,
-    borderRadius: 2
-  }
-});
