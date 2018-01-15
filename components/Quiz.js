@@ -6,13 +6,11 @@ import {
   Platform,
   TouchableOpacity
 } from "react-native";
-import shuffle from "shuffle-array";
 import Answers from "./Answers";
+import PreparingQuiz from "./PreparingQuiz";
+import DoneQuiz from "./DoneQuiz";
+import { buildQuiz } from "../utils/helpers";
 import { black, white } from "../utils/colors";
-import {
-  clearLocalNotification,
-  setLocalNotification
-} from "../utils/notifications";
 
 class Quiz extends Component {
   state = {
@@ -24,31 +22,9 @@ class Quiz extends Component {
   componentDidMount() {
     this.setState({
       points: 0,
-      quiz: this.buildQuiz(this.props.navigation.state.params.questions)
+      quiz: buildQuiz(this.props.navigation.state.params.questions)
     });
   }
-
-  buildQuiz = questions => {
-    const answers = questions.map(q => q.answer);
-    const shuffledAnswers = this.buildShuffledAnswers(answers);
-    const quiz = questions.map((q, i) => ({
-      question: q.question,
-      correct: q.answer,
-      incorrect: shuffledAnswers[i]
-    }));
-    return quiz;
-  };
-
-  buildShuffledAnswers = answers => {
-    let flag = false;
-    let shuffledAnswers;
-    while (!flag) {
-      shuffledAnswers = shuffle(answers, { copy: true });
-      // flag is true if no shuffledAnswer sits in the same index in answers
-      flag = shuffledAnswers.filter((s, i) => s === answers[i]).length === 0;
-    }
-    return shuffledAnswers;
-  };
 
   nextQuestion = () => {
     this.setState(prevState => ({
@@ -63,20 +39,16 @@ class Quiz extends Component {
     this.nextQuestion();
   };
 
-  preparingQuiz = () => {
-    return (
-      <View>
-        <Text>Preparing Quiz</Text>
-      </View>
-    );
-  };
-
   renderQuestion = (quiz, position) => {
     return (
       <View>
         <Text>QUIZ</Text>
         {position === quiz.length ? (
-          this.renderDoneWithQuiz()
+          <DoneQuiz
+            quiz={this.state.quiz}
+            points={this.state.points}
+            resetQuiz={this.resetQuiz}
+          />
         ) : (
           <View>
             <Text>Progression: {`${position}/${quiz.length}`}</Text>
@@ -101,44 +73,21 @@ class Quiz extends Component {
     );
   };
 
-  renderDoneWithQuiz = () => {
-    // Once a quiz is finished, remove the notification for this day and set one for tomorrow
-    clearLocalNotification().then(setLocalNotification);
-    return (
-      <View>
-        <Text>DONE!</Text>
-        <Text>{this.renderScore()}</Text>
-        <TouchableOpacity
-          style={Platform.OS === "ios" ? styles.iosBtn : styles.androidBtn}
-          onPress={this.resetQuiz}
-        >
-          <Text style={{ fontSize: 24, textAlign: "center", color: white }}>
-            Retry
-          </Text>
-        </TouchableOpacity>
-      </View>
-    );
-  };
-
-  renderScore = () => {
-    return this.state.quiz.length !== 0
-      ? `${this.state.points} out of ${this.state.quiz.length}`
-      : "0";
-  };
-
   resetQuiz = () => {
     this.setState({
       points: 0,
-      quiz: this.buildQuiz(this.props.navigation.state.params.questions),
+      quiz: buildQuiz(this.props.navigation.state.params.questions),
       position: 0
     });
   };
 
   render() {
     const { quiz, position } = this.state;
-    return quiz.length === 0
-      ? this.preparingQuiz()
-      : this.renderQuestion(quiz, position);
+    return quiz.length === 0 ? (
+      <PreparingQuiz />
+    ) : (
+      this.renderQuestion(quiz, position)
+    );
   }
 }
 
