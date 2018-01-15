@@ -8,7 +8,9 @@ class Answers extends Component {
   state = {
     revealAnswer: false
   };
-
+  componentDidMount() {
+    this.setState({ revealAnswer: false });
+  }
   toggleAnswer = () => {
     this.setState({ revealAnswer: !this.state.revealAnswer });
   };
@@ -55,6 +57,15 @@ class Answers extends Component {
         <InteractiveButton
           text={"Reveal Answer"}
           interaction={this.toggleAnswer}
+          primaryColor={black}
+          secondaryColor={white}
+        />
+        <InteractiveButton
+          text={"Pass"}
+          interaction={() => {
+            this.setState({ revealAnswer: false });
+            passToNext();
+          }}
           primaryColor={black}
           secondaryColor={white}
         />
