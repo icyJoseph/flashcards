@@ -8,9 +8,11 @@ const Title = ({ title, numberOfQuestions }) => {
       <Text style={{ fontSize: 24, fontWeight: "200" }}>
         {capitalizer(title)}
       </Text>
-      <Text style={{ fontSize: 16 }}>
-        {numberOfQuestions} {numberOfQuestions === 1 ? " card" : " cards"}
-      </Text>
+      {numberOfQuestions !== undefined ? (
+        <Text style={{ fontSize: 16 }}>
+          {numberOfQuestions} {numberOfQuestions === 1 ? " card" : " cards"}
+        </Text>
+      ) : null}
     </View>
   );
 };
