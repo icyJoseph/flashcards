@@ -47,28 +47,38 @@ export class AddCard extends Component {
 
   render() {
     const { inputQuestion, inputAnswer, disableSubmitButton } = this.state;
+    const disableSubmit = inputQuestion === "" || inputAnswer === "";
     return (
-      <View>
-        <Title title={"Add a new card"} />
-        <Title title={"Question?"} />
-        <TextInput
-          style={styles.input}
-          value={inputQuestion}
-          onChangeText={this.handleQuestionChange}
-        />
-        <Title title={"Answer"} />
-        <TextInput
-          style={styles.input}
-          value={inputAnswer}
-          onChangeText={this.handleAnswerChange}
-        />
-        <InteractiveButton
-          text={"Add Card"}
-          interaction={this.submitCard}
-          primaryColor={black}
-          secondaryColor={white}
-        />
-      </View>
+      <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }}>
+        <View style={{ flex: 1 }}>
+          <Title title={"Add a new card"} />
+        </View>
+        <View style={{ flex: 4 }}>
+          <Title title={"Question?"} />
+          <TextInput
+            style={styles.input}
+            value={inputQuestion}
+            onChangeText={this.handleQuestionChange}
+          />
+        </View>
+        <View style={{ flex: 4 }}>
+          <Title title={"Answer"} />
+          <TextInput
+            style={styles.input}
+            value={inputAnswer}
+            onChangeText={this.handleAnswerChange}
+          />
+        </View>
+        <View style={{ flex: 4 }}>
+          <InteractiveButton
+            text={disableSubmit ? "Fill in Question and Answer" : "Add Card"}
+            interaction={this.submitCard}
+            primaryColor={black}
+            secondaryColor={white}
+            disable={disableSubmit}
+          />
+        </View>
+      </KeyboardAvoidingView>
     );
   }
 }
@@ -77,8 +87,9 @@ export default connect(undefined, null)(AddCard);
 
 const styles = StyleSheet.create({
   input: {
-    height: 40,
     borderColor: "gray",
-    borderWidth: 1
+    borderWidth: 1,
+    padding: 10,
+    margin: 10
   }
 });
