@@ -22,14 +22,18 @@ const InteractiveButton = ({
           ? [
               styles.iosBtn,
               {
-                flex: 3,
-                flexDirection: "row",
-                justifyContent: "center",
                 backgroundColor: secondaryColor,
-                borderColor: primaryColor
+                borderColor: primaryColor,
+                minWidth: 300
               }
             ]
-          : [styles.androidBtn, { backgroundColor: primaryColor }]
+          : [
+              styles.androidBtn,
+              {
+                backgroundColor: primaryColor,
+                minWidth: 300
+              }
+            ]
       }
       onPress={interaction}
       disabled={disable === undefined ? false : disable}
