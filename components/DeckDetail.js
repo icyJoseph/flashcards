@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { View, Text, TouchableOpacity, Animated } from "react-native";
 import { NavigationActions } from "react-navigation";
 import Title from "./Title";
+import { lightGray } from "../utils/colors";
 
 class DeckDetail extends Component {
   state = {
@@ -29,8 +30,12 @@ class DeckDetail extends Component {
       <TouchableOpacity
         onPress={() => this.animateBeforeNavigating(title, handleOnPress)}
       >
-        <Animated.View style={{ opacity: fade }}>
-          <Title title={title} numberOfQuestions={numberOfQuestions} />
+        <Animated.View style={{ opacity: fade, height: 200 }}>
+          <Title
+            title={title}
+            numberOfQuestions={numberOfQuestions}
+            borderColor={lightGray}
+          />
         </Animated.View>
       </TouchableOpacity>
     );
