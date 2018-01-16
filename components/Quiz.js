@@ -42,6 +42,11 @@ class Quiz extends Component {
     });
   };
 
+  _goBack = () => {
+    const { title } = this.props.navigation.state.params;
+    this.props.navigation.navigate("IndividualDeck", { title });
+  };
+
   render() {
     const { quiz, position, points } = this.state;
     const { title } = this.props.navigation.state.params;
@@ -57,6 +62,7 @@ class Quiz extends Component {
         resetQuiz={this.resetQuiz}
         addPoint={this.addPoint}
         nextQuestion={this.nextQuestion}
+        goBack={this._goBack}
       />
     );
   }

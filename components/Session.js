@@ -13,7 +13,8 @@ const Session = ({
   points,
   resetQuiz,
   addPoint,
-  nextQuestion
+  nextQuestion,
+  goBack
 }) => {
   return (
     <View style={{ flex: 1 }}>
@@ -30,7 +31,12 @@ const Session = ({
       </View>
       {position === quiz.length ? (
         <View style={{ flex: 8 }}>
-          <DoneQuiz quiz={quiz} points={points} resetQuiz={resetQuiz} />
+          <DoneQuiz
+            quiz={quiz}
+            points={points}
+            resetQuiz={resetQuiz}
+            goBack={goBack}
+          />
         </View>
       ) : (
         <View style={{ flex: 8, alignItems: "center" }}>

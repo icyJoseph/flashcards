@@ -6,9 +6,9 @@ import {
   clearLocalNotification,
   setLocalNotification
 } from "../utils/notifications";
-import { black, white, green } from "../utils/colors";
+import { black, white, green, gray } from "../utils/colors";
 
-const DoneQuiz = ({ quiz, points, resetQuiz }) => {
+const DoneQuiz = ({ quiz, points, resetQuiz, goBack }) => {
   // Once a quiz is finished, remove the notification for this day and set one for tomorrow
   clearLocalNotification().then(setLocalNotification);
 
@@ -22,9 +22,16 @@ const DoneQuiz = ({ quiz, points, resetQuiz }) => {
       <Text style={styles.text}>{`Your score is: ${renderScore()}`} </Text>
       <InteractiveButton
         style={{ flex: 1 }}
-        text={"Retry"}
+        text={"Restart Quiz"}
         interaction={resetQuiz}
         primaryColor={green}
+        secondaryColor={white}
+      />
+      <InteractiveButton
+        style={{ flex: 1 }}
+        text={"Back to Deck"}
+        interaction={goBack}
+        primaryColor={gray}
         secondaryColor={white}
       />
     </View>
