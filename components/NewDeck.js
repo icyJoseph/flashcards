@@ -61,21 +61,31 @@ class NewDeck extends Component {
   render() {
     const { input, disableSubmitButton } = this.state;
     return (
-      <KeyboardAvoidingView>
-        <Title title={"What's the title of your new deck?"} />
-        <TextInput
-          style={styles.input}
-          value={input}
-          onChangeText={this.handleTextChange}
-        />
-        {this.warning()}
-        <InteractiveButton
-          text={disableSubmitButton ? "Enter a valid title" : "Create Deck"}
-          interaction={this.submitTitle}
-          primaryColor={black}
-          secondaryColor={white}
-          disable={disableSubmitButton}
-        />
+      <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }}>
+        <View style={{ flex: 1 }}>
+          <Title
+            style={{ padding: 10, margin: 25 }}
+            borderColor="transparent"
+            title={"What's the title of your new deck?"}
+          />
+        </View>
+        <View style={{ flex: 1 }}>
+          <TextInput
+            style={[styles.input]}
+            value={input}
+            onChangeText={this.handleTextChange}
+          />
+        </View>
+        <View style={{ flex: 3 }}>
+          {this.warning()}
+          <InteractiveButton
+            text={disableSubmitButton ? "Enter a valid title" : "Create Deck"}
+            interaction={this.submitTitle}
+            primaryColor={black}
+            secondaryColor={white}
+            disable={disableSubmitButton}
+          />
+        </View>
       </KeyboardAvoidingView>
     );
   }
@@ -85,10 +95,9 @@ export default connect(state => ({ decks: state.decks }), null)(NewDeck);
 
 const styles = StyleSheet.create({
   input: {
-    height: 40,
     borderColor: "gray",
     borderWidth: 1,
-    padding: 5,
+    padding: 10,
     margin: 10
   }
 });
