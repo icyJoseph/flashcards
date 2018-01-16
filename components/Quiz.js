@@ -44,10 +44,13 @@ class Quiz extends Component {
 
   render() {
     const { quiz, position, points } = this.state;
+    const { title } = this.props.navigation.state.params;
     return quiz.length === 0 ? (
-      <PreparingQuiz />
+      <PreparingQuiz style={{ flex: 1 }} />
     ) : (
       <Session
+        style={{ flex: 1, alignItems: "center" }}
+        title={title}
         quiz={quiz}
         position={position}
         points={points}
