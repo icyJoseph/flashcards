@@ -23,10 +23,13 @@ const IndividualDeck = ({ navigation, decks }) => {
   const { title } = navigation.state.params;
   const questions = decks[title] !== undefined ? decks[title].questions : [];
   const numberOfQuestions = questions === undefined ? 0 : questions.length;
+
   return (
     <View style={{ flex: 1 }}>
-      <Title title={title} numberOfQuestions={numberOfQuestions} />
-      <View style={styles.button}>
+      <View style={{ flex: 4 }}>
+        <Title title={title} numberOfQuestions={numberOfQuestions} />
+      </View>
+      <View style={{ flex: 1 }}>
         <InteractiveButton
           text={"Create New Question"}
           interaction={() => toAddCard(title)}
@@ -50,10 +53,3 @@ const IndividualDeck = ({ navigation, decks }) => {
 };
 
 export default connect(state => ({ decks: state.decks }), null)(IndividualDeck);
-
-const styles = StyleSheet.create({
-  button: {
-    flexDirection: "column",
-    justifyContent: "space-around"
-  }
-});
