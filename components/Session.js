@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
+import shuffle from "shuffle-array";
 import DoneQuiz from "./DoneQuiz";
 import Answers from "./Answers";
 import Title from "./Title";
@@ -16,6 +17,16 @@ const Session = ({
   nextQuestion,
   goBack
 }) => {
+  const randomized =
+    position < quiz.length
+      ? shuffle(
+          [
+            { answer: quiz[position].correct },
+            { answer: quiz[position].incorrect }
+          ],
+          { copy: true }
+        )
+      : [];
   return (
     <View style={{ flex: 1 }}>
       <Text
@@ -44,9 +55,10 @@ const Session = ({
           <Answers
             style={{ flex: 2 }}
             correct={quiz[position].correct}
-            incorrect={quiz[position].incorrect}
+            randomized={randomized}
             addPoint={addPoint}
             passToNext={nextQuestion}
+            end={position + 1 === quiz.length}
           />
         </View>
       )}
