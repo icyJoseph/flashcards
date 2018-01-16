@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { View, Text } from "react-native";
 import shuffle from "shuffle-array";
 import InteractiveButton from "./InteractiveButton";
-import { black, white } from "../utils/colors";
+import { black, blue, white, gray, green, red } from "../utils/colors";
 
 class Answers extends Component {
   state = {
@@ -20,7 +20,7 @@ class Answers extends Component {
       <InteractiveButton
         text={correct}
         interaction={this.toggleAnswer}
-        primaryColor={black}
+        primaryColor={green}
         secondaryColor={white}
       />
     );
@@ -50,14 +50,20 @@ class Answers extends Component {
     );
 
     return (
-      <View>
+      <View
+        style={{
+          flex: 1,
+          alignItems: "center",
+          justifyContent: "center"
+        }}
+      >
         {revealAnswer
           ? this.Answer(correct)
           : this.randomizedOrderAnswers(randomized)}
         <InteractiveButton
-          text={"Reveal Answer"}
+          text={revealAnswer ? "Hide Answer" : "Reveal Answer"}
           interaction={this.toggleAnswer}
-          primaryColor={black}
+          primaryColor={blue}
           secondaryColor={white}
         />
         <InteractiveButton
@@ -66,7 +72,7 @@ class Answers extends Component {
             this.setState({ revealAnswer: false });
             passToNext();
           }}
-          primaryColor={black}
+          primaryColor={gray}
           secondaryColor={white}
         />
       </View>
