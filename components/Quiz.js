@@ -31,7 +31,6 @@ class Quiz extends Component {
     this.setState(prevState => ({
       points: prevState.points + 1
     }));
-    this.nextQuestion();
   };
 
   resetQuiz = () => {
