@@ -18,6 +18,17 @@ class Decks extends Component {
     }).start();
   }
 
+  FlatListItemSeparator = () => {
+    return (
+      <View
+        style={{
+          height: 10,
+          width: "100%"
+        }}
+      />
+    );
+  };
+
   onItemPress = title => {
     this.props.navigation.navigate("IndividualDeck", { title });
   };
@@ -29,16 +40,25 @@ class Decks extends Component {
 
     const { fadeIn } = this.state;
     return (
-      <Animated.View style={[{ opacity: fadeIn }]}>
+      <Animated.View
+        style={{
+          flex: 1,
+          opacity: fadeIn,
+          margin: 10,
+          justifyContent: "center"
+        }}
+      >
         <FlatList
           data={decks}
           keyExtractor={item => item.title}
+          ItemSeparatorComponent={this.FlatListItemSeparator}
           renderItem={deck => {
             return (
               <DeckDetail
                 key={deck.index}
                 {...deck.item}
                 handleOnPress={this.onItemPress}
+                style={{ height: 200, padding: 10 }}
               />
             );
           }}
