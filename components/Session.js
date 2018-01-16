@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import DoneQuiz from "./DoneQuiz";
 import Answers from "./Answers";
 import Title from "./Title";
@@ -17,21 +17,26 @@ const Session = ({
 }) => {
   return (
     <View style={{ flex: 1 }}>
-      <Text style={{ alignItems: "flex-start" }}>{`Progression: ${position}/${
-        quiz.length
-      }`}</Text>
-      <View style={{ flex: 1 }}>
-        <Title title={capitalizer(title)} />
+      <Text
+        style={{ flex: 1, alignItems: "flex-start" }}
+      >{`Progression: ${position}/${quiz.length}`}</Text>
+      <View
+        style={{
+          flex: 1,
+          alignItems: "center"
+        }}
+      >
+        <Text style={styles.text}>{capitalizer(title)}</Text>
       </View>
       {position === quiz.length ? (
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 8 }}>
           <DoneQuiz quiz={quiz} points={points} resetQuiz={resetQuiz} />
         </View>
       ) : (
-        <View style={{ flex: 1 }}>
-          <Title title={quiz[position].question} style={{ flex: 2 }} />
+        <View style={{ flex: 8, alignItems: "center" }}>
+          <Text style={styles.text}>{quiz[position].question}</Text>
           <Answers
-            style={{ flex: 4 }}
+            style={{ flex: 2 }}
             correct={quiz[position].correct}
             incorrect={quiz[position].incorrect}
             addPoint={addPoint}
@@ -44,3 +49,10 @@ const Session = ({
 };
 
 export default Session;
+
+const styles = StyleSheet.create({
+  text: {
+    fontSize: 24,
+    fontWeight: "200"
+  }
+});
