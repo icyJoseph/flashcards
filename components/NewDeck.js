@@ -71,7 +71,7 @@ class NewDeck extends Component {
         </View>
         <View style={{ flex: 1 }}>
           <TextInput
-            style={[styles.input]}
+            style={styles.input}
             value={input}
             onChangeText={this.handleTextChange}
           />
