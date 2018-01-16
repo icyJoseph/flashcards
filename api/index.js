@@ -35,6 +35,6 @@ export function addCardToDeck(title, card) {
 
 export function removeAllDecks() {
   return AsyncStorage.removeItem(DECK_STORAGE_KEY).then(res =>
-    console.log("REMOVED", res)
+    console.log("I did as you wished and only left: ", res)
   );
 }
