@@ -2,9 +2,15 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { capitalizer } from "../utils/helpers";
 
-const Title = ({ title, numberOfQuestions }) => {
+const Title = ({ title, numberOfQuestions, borderColor }) => {
   return (
-    <View style={[styles.container, styles.item]}>
+    <View
+      style={[
+        styles.container,
+        styles.item,
+        { borderColor: borderColor || "rgba(0,0,0,0)" }
+      ]}
+    >
       <Text style={{ fontSize: 24, fontWeight: "200" }}>
         {capitalizer(title)}
       </Text>
@@ -26,11 +32,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 4,
-    borderWidth: 0.5,
-    borderColor: "#fff"
+    borderWidth: 0.5
   },
   item: {
-    padding: 10,
-    height: 200
+    padding: 10
   }
 });
