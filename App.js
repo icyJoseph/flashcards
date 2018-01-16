@@ -125,21 +125,12 @@ class App extends Component {
     return (
       <Provider store={configureStore()}>
         <View style={{ flex: 1 }}>
-          <FitnessStatusBar backgroundCOlor={black} barStyle="light-content" />
+          <FitnessStatusBar backgroundColor={black} barStyle="light-content" />
           <MainNavigator />
         </View>
       </Provider>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
-  }
-});
 
 export default App;
