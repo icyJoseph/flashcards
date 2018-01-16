@@ -40,7 +40,11 @@ const IndividualDeck = ({ navigation, decks }) => {
           text={
             questions && numberOfQuestions > 1
               ? "Start Quiz"
-              : "Please Add two or more Questions"
+              : `Please add ${
+                  numberOfQuestions < 1
+                    ? "two more questions"
+                    : "one more question"
+                }`
           }
           interaction={() => toQuiz(title, questions)}
           primaryColor={black}
