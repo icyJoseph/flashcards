@@ -16,8 +16,8 @@ const IndividualDeck = ({ navigation, decks }) => {
     navigation.navigate("AddCard", { title });
   };
 
-  const toQuiz = questions => {
-    navigation.navigate("Quiz", { questions });
+  const toQuiz = (title, questions) => {
+    navigation.navigate("Quiz", { title, questions });
   };
 
   const { title } = navigation.state.params;
@@ -42,7 +42,7 @@ const IndividualDeck = ({ navigation, decks }) => {
               ? "Start Quiz"
               : "Please Add two or more Questions"
           }
-          interaction={() => toQuiz(questions)}
+          interaction={() => toQuiz(title, questions)}
           primaryColor={black}
           secondaryColor={white}
           disable={questions === undefined || numberOfQuestions < 1}
