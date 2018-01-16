@@ -53,7 +53,7 @@ export class AddCard extends Component {
         <View style={{ flex: 1 }}>
           <Title title={"Add a new card"} />
         </View>
-        <View style={{ flex: 4 }}>
+        <View style={{ flex: 3 }}>
           <Title title={"Question?"} />
           <TextInput
             style={styles.input}
@@ -61,7 +61,7 @@ export class AddCard extends Component {
             onChangeText={this.handleQuestionChange}
           />
         </View>
-        <View style={{ flex: 4 }}>
+        <View style={{ flex: 3 }}>
           <Title title={"Answer"} />
           <TextInput
             style={styles.input}
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
   input: {
     borderColor: "gray",
     borderWidth: 1,
-    padding: 20,
-    margin: 20
+    padding: 10,
+    margin: 10
   }
 });
