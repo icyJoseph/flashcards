@@ -29,7 +29,7 @@ const IndividualDeck = ({ navigation, decks }) => {
       <View style={{ flex: 4 }}>
         <Title title={title} numberOfQuestions={numberOfQuestions} />
       </View>
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, alignItems: "center" }}>
         <InteractiveButton
           text={"Create New Question"}
           interaction={() => toAddCard(title)}
