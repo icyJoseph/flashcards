@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { View, Text, FlatList, Animated, Easing } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  Animated,
+  Easing
+} from "react-native";
 import { connect } from "react-redux";
 import * as actions from "../actions";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -35,7 +42,7 @@ class Decks extends Component {
     this.setState({ showSpinner: true });
     Animated.timing(this.state.spinValue, {
       toValue: 360,
-      duration: 3000,
+      duration: 1500,
       easing: Easing.linear
     }).start(() => {
       this.setState({ showSpinner: false, spinValue: new Animated.Value(0) });
@@ -56,31 +63,41 @@ class Decks extends Component {
           flex: 1,
           opacity: fadeIn,
           margin: 10,
-          justifyContent: "center",
-          alignItems: "center"
+          justifyContent: "center"
         }}
       >
         {showSpinner ? (
-          <Animated.Image
-            style={{
-              height: 50,
-              width: 50,
-              transform: [
-                {
-                  rotate: spinValue.interpolate({
-                    inputRange: [0, 360],
-                    outputRange: ["0deg", "360deg"]
-                  })
-                }
-              ]
-            }}
-            source={require("../assets/images/loading.png")}
-          />
+          <View style={{ flex: 1 }}>
+            <View style={styles.container}>
+              <Text style={styles.text}>Loading... ⏲</Text>
+            </View>
+            <View style={styles.container}>
+              <Animated.Image
+                style={{
+                  height: 50,
+                  width: 50,
+                  transform: [
+                    {
+                      rotate: spinValue.interpolate({
+                        inputRange: [0, 360],
+                        outputRange: ["0deg", "360deg"]
+                      })
+                    }
+                  ]
+                }}
+                source={require("../assets/images/loading.png")}
+              />
+            </View>
+            <View style={styles.container}>
+              <Text style={styles.text}>Please wait ✋</Text>
+            </View>
+          </View>
         ) : (
           <FlatList
             data={decks}
             keyExtractor={item => item.title}
             ItemSeparatorComponent={this.FlatListItemSeparator}
+            showsVerticalScrollIndicator={false}
             renderItem={deck => {
               return (
                 <DeckDetail
@@ -104,3 +121,15 @@ export default connect(
   }),
   null
 )(Decks);
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  text: {
+    fontSize: 24,
+    fontWeight: "200"
+  }
+});
