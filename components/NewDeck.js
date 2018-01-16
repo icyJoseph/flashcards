@@ -62,7 +62,7 @@ class NewDeck extends Component {
     const { input, disableSubmitButton } = this.state;
     return (
       <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }}>
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, alignItems: "center" }}>
           <Title
             style={{ padding: 10, margin: 25 }}
             borderColor="transparent"
@@ -76,7 +76,7 @@ class NewDeck extends Component {
             onChangeText={this.handleTextChange}
           />
         </View>
-        <View style={{ flex: 3 }}>
+        <View style={{ flex: 3, alignItems: "center" }}>
           {this.warning()}
           <InteractiveButton
             text={disableSubmitButton ? "Enter a valid title" : "Create Deck"}

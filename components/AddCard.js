@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
   input: {
     borderColor: "gray",
     borderWidth: 1,
-    padding: 10,
-    margin: 10
+    padding: 20,
+    margin: 20
   }
 });

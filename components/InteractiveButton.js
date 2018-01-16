@@ -22,15 +22,14 @@ const InteractiveButton = ({
           ? [
               styles.iosBtn,
               {
+                flex: 3,
+                flexDirection: "row",
+                justifyContent: "center",
                 backgroundColor: secondaryColor,
-                borderColor: primaryColor,
-                width: width || 300
+                borderColor: primaryColor
               }
             ]
-          : [
-              styles.androidBtn,
-              { backgroundColor: primaryColor, width: width || 300 }
-            ]
+          : [styles.androidBtn, { backgroundColor: primaryColor }]
       }
       onPress={interaction}
       disabled={disable === undefined ? false : disable}
@@ -53,13 +52,13 @@ export default InteractiveButton;
 const styles = StyleSheet.create({
   iosBtn: {
     borderRadius: 3,
-    padding: 5,
+    padding: 10,
     paddingLeft: 25,
     paddingRight: 25
   },
   androidBtn: {
-    margin: 5,
-    padding: 10,
+    margin: 10,
+    padding: 20,
     borderRadius: 2
   }
 });

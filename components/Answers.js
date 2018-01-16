@@ -53,7 +53,6 @@ class Answers extends Component {
       <View
         style={{
           flex: 1,
-          alignItems: "center",
           justifyContent: "center"
         }}
       >
