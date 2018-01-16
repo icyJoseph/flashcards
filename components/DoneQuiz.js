@@ -1,12 +1,12 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import InteractiveButton from "./InteractiveButton";
 import Title from "./Title";
 import {
   clearLocalNotification,
   setLocalNotification
 } from "../utils/notifications";
-import { black, white } from "../utils/colors";
+import { black, white, green } from "../utils/colors";
 
 const DoneQuiz = ({ quiz, points, resetQuiz }) => {
   // Once a quiz is finished, remove the notification for this day and set one for tomorrow
@@ -17,13 +17,14 @@ const DoneQuiz = ({ quiz, points, resetQuiz }) => {
   };
 
   return (
-    <View>
-      <Title title={"DONE"} />
-      <Title title={renderScore()} />
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <Text style={styles.text}>Complete!</Text>
+      <Text style={styles.text}>{`Your score is: ${renderScore()}`} </Text>
       <InteractiveButton
+        style={{ flex: 1 }}
         text={"Retry"}
         interaction={resetQuiz}
-        primaryColor={black}
+        primaryColor={green}
         secondaryColor={white}
       />
     </View>
@@ -31,3 +32,10 @@ const DoneQuiz = ({ quiz, points, resetQuiz }) => {
 };
 
 export default DoneQuiz;
+
+const styles = StyleSheet.create({
+  text: {
+    fontSize: 24,
+    fontWeight: "200"
+  }
+});
