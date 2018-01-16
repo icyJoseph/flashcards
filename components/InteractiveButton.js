@@ -12,7 +12,8 @@ const InteractiveButton = ({
   interaction,
   primaryColor,
   secondaryColor,
-  disable
+  disable,
+  width
 }) => {
   return (
     <TouchableOpacity
@@ -20,9 +21,16 @@ const InteractiveButton = ({
         Platform.OS === "ios"
           ? [
               styles.iosBtn,
-              { backgroundColor: secondaryColor, borderColor: primaryColor }
+              {
+                backgroundColor: secondaryColor,
+                borderColor: primaryColor,
+                width: width || 300
+              }
             ]
-          : [styles.androidBtn, { backgroundColor: primaryColor }]
+          : [
+              styles.androidBtn,
+              { backgroundColor: primaryColor, width: width || 300 }
+            ]
       }
       onPress={interaction}
       disabled={disable === undefined ? false : disable}
