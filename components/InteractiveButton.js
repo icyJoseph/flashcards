@@ -59,6 +59,6 @@ const styles = StyleSheet.create({
   androidBtn: {
     margin: 10,
     padding: 20,
-    borderRadius: 2
+    borderRadius: 7
   }
 });
