@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { capitalizer } from "../utils/helpers";
+import { transparent } from "../utils/colors";
 
 const Title = ({ title, numberOfQuestions, borderColor }) => {
   return (
@@ -8,7 +9,7 @@ const Title = ({ title, numberOfQuestions, borderColor }) => {
       style={[
         styles.container,
         styles.item,
-        { borderColor: borderColor || "rgba(0,0,0,0)" }
+        { borderColor: borderColor || transparent }
       ]}
     >
       <Text style={{ fontSize: 24, fontWeight: "200" }}>
