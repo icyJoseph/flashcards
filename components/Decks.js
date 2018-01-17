@@ -8,7 +8,7 @@ import {
   Easing
 } from "react-native";
 import { connect } from "react-redux";
-import * as actions from "../actions";
+import { getAllDecks } from "../actions";
 import { MaterialIcons } from "@expo/vector-icons";
 import DeckDetail from "./DeckDetail";
 
@@ -20,7 +20,7 @@ class Decks extends Component {
   };
 
   componentDidMount() {
-    this.props.dispatch(actions.getAllDecks);
+    this.props.dispatch(getAllDecks);
     Animated.timing(this.state.fadeIn, {
       toValue: 1,
       duration: 2000
@@ -115,12 +115,9 @@ class Decks extends Component {
   }
 }
 
-export default connect(
-  state => ({
-    decks: state.decks
-  }),
-  null
-)(Decks);
+export default connect(state => ({
+  decks: state.decks
+}))(Decks);
 
 const styles = StyleSheet.create({
   container: {
