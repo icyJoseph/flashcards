@@ -42,8 +42,7 @@ class Quiz extends Component {
   };
 
   _goBack = () => {
-    const { title } = this.props.navigation.state.params;
-    this.props.navigation.navigate("IndividualDeck", { title });
+    this.props.navigation.goBack();
   };
 
   render() {
