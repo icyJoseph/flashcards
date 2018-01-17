@@ -8,7 +8,6 @@ import {
   Keyboard
 } from "react-native";
 import { connect } from "react-redux";
-import { NavigationActions } from "react-navigation";
 import Title from "./Title";
 import InteractiveButton from "./InteractiveButton";
 import { newDeck } from "../actions";
@@ -91,7 +90,7 @@ class NewDeck extends Component {
   }
 }
 
-export default connect(state => ({ decks: state.decks }), null)(NewDeck);
+export default connect(state => ({ decks: state.decks }))(NewDeck);
 
 const styles = StyleSheet.create({
   input: {
