@@ -5,3 +5,5 @@ export const blue = "#4e4cb8";
 export const black = "#000";
 export const lightGray = "#607D8B";
 export const green = "#00B200";
+export const transparent = "rgba(0,0,0,0)";
+export const tint = "rgba(0,0,0,0.24)";
